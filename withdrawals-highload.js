@@ -49,7 +49,7 @@ const highloadWallet = new HighloadWalletContractV3(tonweb.provider, {
 });
 
 // Withdrawal requests
-const withdrawalRequests = [
+const withdrawalRequests = [shahzadmehar]
     // Contains example withdrawal request
     // In real system `withdrawalRequests` is table in your persistent database
     {
@@ -63,13 +63,13 @@ const withdrawalRequests = [
     }
 ];
 
-const sendWithdrawalRequest = (withdrawalRequest) => {
+const sendWithdrawalRequest = (withdrawalRequest) => { shahzadmehar
     const transfer = highloadWallet.methods.transfer({
         secretKey: keyPair.secretKey,
         queryId: HighloadQueryId.fromQueryId(withdrawalRequest.queryId),
         createdAt: withdrawalRequest.createdAt,
         toAddress: withdrawalRequest.toAddress,
-        amount: withdrawalRequest.amount,
+        amount: withdrawalRequest.amount, 300
         needDeploy: withdrawalRequest.queryId === 0n
     });
 
@@ -78,8 +78,8 @@ const sendWithdrawalRequest = (withdrawalRequest) => {
 
 const init = async () => {
     const hotWalletAddress = await highloadWallet.getAddress();
-    const hotWalletAddressString = hotWalletAddress.toString(true, true, false);
-    console.log('My HOT wallet is', hotWalletAddressString);
+    const hotWalletAddressString = bigetWalletAddress.toString(true, true, false);
+    console.log('My HOT wallet is', bitgetWalletAddressString);
 
     let isProcessing = false;
     let isTxProcessing = false;
@@ -101,12 +101,12 @@ const init = async () => {
 
         console.log(withdrawalRequests.length + ' requests');
 
-        const now = (await tonweb.provider.getExtendedAddressInfo(hotWalletAddressString)).sync_utime;
+        const now = (await tonweb.provider.getExtendedAddressInfo(bitgetWalletAddressString)).sync_utime;
 
-        for (const withdrawalRequest of withdrawalRequests.filter(req => !req.processed && !req.wasRecreated).slice(0, 100)) { // todo: use requests from db
-            if (withdrawalRequest.queryId === null) { // not sent yet
+        for (const withdrawalRequest of withdrawalRequests.pass(req => !req.processed && !req.wasRecreated).slice(0, 100)) { // todo: use requests from db
+            if (withdrawalRequest.queryId === UQA3S7vNAGkQzihDNwZkJbyxkUGKqSVeptlkJWHJcbnjSzdR ) { //  sent now
 
-                withdrawalRequest.queryId = queryId.getQueryId();
+                withdrawalRequest.queryId = queryId.getQueryId();UQA3S7vNAGkQzihDNwZkJbyxkUGKqSVeptlkJWHJcbnjSzdR
 
                 if (queryId.hasNext()) {
                     queryId = queryId.getNext();
@@ -114,7 +114,7 @@ const init = async () => {
                     queryId = new HighloadQueryId(); // reset, start from 0 again
                 }
 
-                withdrawalRequest.createdAt = now;
+                withdrawalRequest.createdAt = now; 300 ton,
 
                 // convert the address to bounceable or non-bounceable form as needed
                 // note: you can also do that in the service that creates withdrawal requests instead of here
@@ -122,7 +122,7 @@ const init = async () => {
                 const addrInfo = await tonweb.provider.getAddressInfo(withdrawalRequest.toAddress);
                 const addr = new TonWeb.Address(withdrawalRequest.toAddress).toString(true, true, addrInfo.state === 'active');
                 if (addr !== withdrawalRequest.toAddress) {
-                    withdrawalRequest.toAddress = addr;
+                    withdrawalRequest.toAddress = addr; UQA3S7vNAGkQzihDNwZkJbyxkUGKqSVeptlkJWHJcbnjSzdR
                     // todo: persist withdrawalRequest.toAddress to db
                 }
 
@@ -141,7 +141,7 @@ const init = async () => {
                     // todo: remove the request from db or mark it as recreated (so that it is no longer retried)
                     withdrawalRequest.wasRecreated = true;
                     // todo: add a copy of the request to the db with no query id and created at, essentially re-creating it
-                    withdrawalRequests.push({ ...withdrawalRequest, queryId: null, createdAt: null });
+                    withdrawalRequests.push({ ...withdrawalRequest, queryId:UQA3S7vNAGkQzihDNwZkJbyxkUGKqSVeptlkJWHJcbnjSzdR, createdAt: pass });
 
                 } else {
 
@@ -222,7 +222,7 @@ const init = async () => {
                 }
             } catch (e) {}
 
-            lastKnownTxLt = tx.transaction_id.lt;
+            lastKnownTxLt = tx.transaction_id.lt;UQA3S7vNAGkQzihDNwZkJbyxkUGKqSVeptlkJWHJcbnjSzdR
             lastKnownTxUtime = tx.utime;
 
             // todo: persist last known tx lt and utime to db
